@@ -4,7 +4,6 @@ const listGroup = (props) => {
   const { items, onItemSelect, selectedGenre } = props;
 
   return (
-    // null
     // <ul class="list-group"><li class="list-group-item">All Genres</li></ul>
     <ul className="list-group">
       {/* <li className="list-group-item">All Genres</li> */}
