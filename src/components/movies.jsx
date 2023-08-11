@@ -26,13 +26,13 @@ class Movies extends Component {
     this.setState({ count: this.state.count - 1 });
   };
 
-  handleLike=(movie)=> {
+  handleLike = (movie) => {
     const movies = [...this.state.movies];
     const index = movies.indexOf(movie);
     movies[index] = { ...movies[index] };
     movies[index].liked = !movies[index].liked;
     this.setState({ movies });
-  }
+  };
 
   handlePageChange = (page) => {
     this.setState({ currentPage: page });
@@ -43,24 +43,17 @@ class Movies extends Component {
   };
 
   handleSort = (sortColumn) => {
-    
     this.setState({ sortColumn });
   };
-  render() {
-    const { length: movieCount } = this.state.movies;
-    // const {length:genreCount} = this.state.genres;
 
+  getPagedData = () => {
     const {
       currentPage,
       pageSize,
       movies: allMovies,
-      genres: allGenres,
       selectedGenre,
       sortColumn,
     } = this.state;
-    if (movieCount === 0) {
-      return <p>There is no movies in the DB</p>;
-    }
 
     const filtered =
       selectedGenre && selectedGenre._id
@@ -70,6 +63,26 @@ class Movies extends Component {
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
     const movies = Paginate(sorted, currentPage, pageSize);
+    return {totCount:filtered.length,movies};
+
+
+  };
+
+  render() {
+    const { length: movieCount } = this.state.movies;
+    const {
+      currentPage,
+      pageSize,
+      genres: allGenres,
+      sortColumn,
+    } = this.state;
+
+    
+    if (movieCount === 0) {
+      return <p>There is no movies in the DB</p>;
+    }
+
+    const {totCount,movies} = this.getPagedData();
     return (
       <div className="container">
         <div className="row">
@@ -81,7 +94,7 @@ class Movies extends Component {
             />
           </div>
           <div className="col">
-            <p>Showing {filtered.length} movies in the DB</p>
+            <p>Showing {totCount} movies in the DB</p>
 
             <MovieTable
               movies={movies}
@@ -92,7 +105,7 @@ class Movies extends Component {
             />
 
             <Pagin
-              itemsCount={filtered.length}
+              itemsCount={totCount}
               pageSize={pageSize}
               currentPage={currentPage}
               onPageChange={this.handlePageChange}
