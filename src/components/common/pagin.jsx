@@ -7,7 +7,6 @@ const Pagin = (props) => {
   const pageLen = Math.ceil(itemsCount / pageSize);
   const pages = _.range(1, pageLen + 1);
 
-  // console.log(currentPage);
   if (pageLen === 1) return null;
 
   return (
