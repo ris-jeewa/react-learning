@@ -6,13 +6,13 @@ class TableBody extends Component {
     return _.get(item,column.path)
   };
   render() {
-    const { data, columns, onLike, onDelete } = this.props;
+    const { data, columns} = this.props;
     return (
       <tbody>
         {data.map((item) => (
-          <tr key={columns.path}>
+          <tr key={item._id}>
             {columns.map((column) =>
-              <td>{this.renderCell(item,column)}</td>)}
+              <td key={column.path || column.key}>{this.renderCell(item,column)}</td>)}
           </tr>  
         ))}
       </tbody>
