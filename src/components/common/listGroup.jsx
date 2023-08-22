@@ -5,7 +5,6 @@ const listGroup = (props) => {
 
   return (
     <ul className="list-group">
-      
       {items.map((genre) => (
         <li
           onClick={() => onItemSelect(genre)}
@@ -19,8 +18,5 @@ const listGroup = (props) => {
   );
 };
 
-// listGroup.defaultProps = {
-//   textProperty: "name",
-//   valueProperty: "_id",
-// };
+
 export default listGroup;

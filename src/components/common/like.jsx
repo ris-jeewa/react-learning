@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// import Movies from './movies';
-//input: liked
-// output: onClick()
+
 
 class Like extends Component {
   render() { 
