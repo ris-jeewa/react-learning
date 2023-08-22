@@ -5,7 +5,6 @@ const listGroup = (props) => {
 
   return (
     <ul className="list-group">
-     
       {items.map((genre) => (
         <li
           onClick={() => onItemSelect(genre)}
